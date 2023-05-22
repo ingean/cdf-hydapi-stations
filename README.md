@@ -10,32 +10,32 @@ Lag et repository i GitHub og clone til utviklingsmaskinen.
 Åpne repositoriet i VS Code og et terminalvindu.
 
 Lage en ny app
-´´´
+```
 cdf createapp hydapi_stations_app
-´´´
+```
 
 Bytte til katalogen
-´´´
+```
 cd hydapi_stations_app
-´´´
+```
 
 Opprette en ny provider
-´´´
+```
 cdf createprovider hydapi_stations_cdf
-´´´
+```
 #### Utvikle en provider
 Å lage en provider innebærer å fylle funksjonen getData() i src/model.js med innhold. Kort fortalt skal du skrive kode som henter data fra ønsket kilde og returnere disse som geojson. Husk at geojson forventer WGS84 (4326).
 
 Ved utvikling av provider er det et par ting å tenke på. Det er mulig å sende med et hostnavn og en id fra featuretjenesten som mottar dataene. Om du ikke har bruk for dette, så må du endre til følgende innstillinger i cdconfig.json (sette hosts til false og disableIdParam til true).
-´´´
+```
  "properties": {
     "hosts": false,
     "disableIdParam": true
   }
-´´´
+```
 
 Når du lager geometri må denne være i WGS84 og desimalgrader. 
-´´´
+```
 {
   "type": "Feature",
   "geometry": {
@@ -44,13 +44,13 @@ Når du lager geometri må denne være i WGS84 og desimalgrader.
   },
   "properties": feature
 }
-´´´
+```
 
 
 ##### Eksportere en ferdig provider-pakke
-´´´
+```
 cdf export hydapi_stations_cdf
-´´´
+```
 
 #### Laste opp provideren til ArcGIS Server
 En custom data provider pakke må lastes opp og registreres på ArcGIS Server siten som benyttes av Enterprise. Dette gjøres via admin-grensesnittet f.eks. https://vmgdts02.azure.geodata.no:6443/arcgis/admin
@@ -72,7 +72,7 @@ home/services/createService
 
 Bruk følgende mal for å opprette en ny feature service. Pass på at type er "FeatureServer" og capabilities er "Query" (read only). Navnet på dataprovideren må også være helt likt 
 
-´´´
+```
 {
   "serviceName": "hydapi_stations",
   "type": "FeatureServer",
@@ -110,7 +110,7 @@ Bruk følgende mal for å opprette en ny feature service. Pass på at type er "F
   "frameworkProperties": [],
   "datasets": []
 }
-´´´
+```
 Her ser du at dataProviderHost og dataProviderid er satt til "" da disse ikke brukes. Dette speiler innstillingene i cdconfig.json (se tidligere beskrivelser).
 
 

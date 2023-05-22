@@ -39,8 +39,6 @@ function translate(results) {
     return f
   })
 
-
-
   let geojson = {
     type: 'FeatureCollection',
     features: features
@@ -51,6 +49,7 @@ function translate(results) {
     description: 'Hydrological stations from NVE API',
     geometryType: 'Point'
   }
+  
   return geojson
 }
 
