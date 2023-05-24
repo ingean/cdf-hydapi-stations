@@ -24,7 +24,13 @@ Opprette en ny provider
 cdf createprovider hydapi_stations_cdf
 ```
 #### Utvikle en provider
-Å lage en provider innebærer å fylle funksjonen getData() i src/model.js med innhold. Kort fortalt skal du skrive kode som henter data fra ønsket kilde og returnere disse som geojson. Husk at geojson forventer WGS84 (4326).
+Å lage en provider innebærer å fylle funksjonen getData() i src/model.js med innhold. Kort fortalt skal du skrive kode som henter data fra ønsket kilde og returnere disse som geojson. Husk at geojson forventer WGS84 (4326). Her kan du bruke alle tilgjengelige moduler til node for å hente data fra ulike kilder. I dette eksempelet benyttes request for å gjøre et https kall til et REST API. Husk å installere node-modulen request for provideren (gå til katalogen til provideren)
+
+```
+cd providers
+cd hydapi_stations_cdf
+npm install request
+```
 
 Ved utvikling av provider er det et par ting å tenke på. Det er mulig å sende med et hostnavn og en id fra featuretjenesten som mottar dataene. Om du ikke har bruk for dette, så må du endre til følgende innstillinger i cdconfig.json (sette hosts til false og disableIdParam til true).
 ```
@@ -34,7 +40,7 @@ Ved utvikling av provider er det et par ting å tenke på. Det er mulig å sende
   }
 ```
 
-Når du lager geometri må denne være i WGS84 og desimalgrader. 
+Når du lager geometri må denne være i WGS84 og desimalgrader. Husk også at koordinatene må være tall og ikke tekst.
 ```
 {
   "type": "Feature",
